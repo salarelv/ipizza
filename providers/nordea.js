@@ -1,6 +1,6 @@
 var IpizzaBank = require('./ipizzabank')
 
-function Sampo (opt) {
+function Nordea (opt) {
   this.name = 'nordea'
   IpizzaBank.apply(this, arguments)
 }
