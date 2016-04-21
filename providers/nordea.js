@@ -12,4 +12,4 @@ Nordea.prototype.gateways =
   }
 
 
-module.exports = Sampo
+module.exports = Nordea
