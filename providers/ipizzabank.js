@@ -25,7 +25,7 @@ function IpizzaBank (opt) {
 IpizzaBank.prototype = Object.create(require('events').EventEmitter.prototype)
 
 IpizzaBank.services =
-  { 1001: { VK_SERVICE: 1001
+  { 1011: { VK_SERVICE: 1011
           , VK_VERSION: '008'
           , VK_SND_ID: ''
           , VK_STAMP: ''
@@ -41,7 +41,7 @@ IpizzaBank.services =
           , VK_ENCODING: 'UTF-8'
           , VK_CHARSET: 'UTF-8'
           }
-  , 1002: { VK_SERVICE: 1002
+  , 1012: { VK_SERVICE: 1012
           , VK_VERSION: '008'
           , VK_SND_ID: ''
           , VK_STAMP: ''
@@ -55,7 +55,7 @@ IpizzaBank.services =
           , VK_ENCODING: 'UTF-8'
           , VK_CHARSET: 'UTF-8'
           }
-  , 1101: { VK_SERVICE: true
+  , 1111: { VK_SERVICE: true
           , VK_VERSION: true
           , VK_SND_ID: true
           , VK_REC_ID: true
@@ -75,7 +75,7 @@ IpizzaBank.services =
           , VK_AUTO: false
           , VK_ENCODING: false
           }
-  , 1901: { VK_SERVICE: true
+  , 1911: { VK_SERVICE: true
           , VK_VERSION: true
           , VK_SND_ID: true
           , VK_REC_ID: true
@@ -205,9 +205,9 @@ IpizzaBank.prototype.validate_ = function () {
 
 IpizzaBank.prototype.json = function () {
   this.validate_();
-  var params = _.clone(IpizzaBank.services[1002])
+  var params = _.clone(IpizzaBank.services[1012])
   if (this.get('account') && this.get('accountName')) {
-    params = _.clone(IpizzaBank.services[1001])
+    params = _.clone(IpizzaBank.services[1011])
     _.extend(params, { VK_NAME: this.get('accountName')
                      , VK_ACC: this.get('account')})
   }
@@ -273,6 +273,7 @@ IpizzaBank.prototype.genMac_ = function (params) {
   log.verbose('req package', pack)
   var signer = crypto.createSign('RSA-SHA1')
   signer.update(pack)
+  //console.log("genMac", signer.sign(this.get('privateKey').toString('utf8'), 'base64'));
   return signer.sign(this.get('privateKey').toString('utf8'), 'base64')
 }
 
@@ -292,6 +293,7 @@ IpizzaBank.prototype.verify_ = function (body) {
   if (this.utf8_) {
     pack = iconv.decode(Buffer(pack), 'ISO-8859-1').toString('utf8')
   }
+
   log.verbose('resp package', pack)
   log.verbose('resp mac', body.VK_MAC)
   var verifier = crypto.createVerify('RSA-SHA1')

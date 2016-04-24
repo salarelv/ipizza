@@ -41,7 +41,7 @@ describe('krediidipank', function() {
     })
     payment.json()
 
-    var result = '0041002003008003abc0021000510.00003EUR000016öäüõÖÄÜÕ'
+    var result = '0041012003008003abc0021000510.00003EUR000016öäüõÖÄÜÕ'
     assert.strictEqual(payment.lastPackage_ , result)
 
   })

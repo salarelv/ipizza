@@ -11,5 +11,4 @@ Nordea.prototype.gateways =
   , production: 'https://netbank.nordea.com/pnbepay/epayp.jsp'
   }
 
-
 module.exports = Nordea
