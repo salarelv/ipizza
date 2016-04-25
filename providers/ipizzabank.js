@@ -241,7 +241,7 @@ IpizzaBank.prototype.json = function () {
                || params['VK_CHARSET'] == 'UTF-8'
 
   params['VK_MAC'] = this.genMac_(params)
-  params['VK_DATETIME'] = (new Date()).toString();
+  params['VK_DATETIME'] = (new Date()).toISOString();
 
   log.verbose('req mac', params['VK_MAC'])
 
