@@ -35,11 +35,13 @@ IpizzaBank.services =
           , VK_NAME: ''
           , VK_REF: ''
           , VK_MSG: ''
+          , VK_RETURN: ''
+          , VK_CANCEL: ''
+          , VK_DATETIME: ''
           , VK_MAC: ''
           , VK_RETURN: ''
           , VK_LANG: 'ENG'
           , VK_ENCODING: 'UTF-8'
-          , VK_CHARSET: 'UTF-8'
           }
   , 1012: { VK_SERVICE: 1012
           , VK_VERSION: '008'
@@ -51,6 +53,7 @@ IpizzaBank.services =
           , VK_MSG: ''
           , VK_MAC: ''
           , VK_RETURN: ''
+          , VK_CANCEL: ''
           , VK_LANG: 'ENG'
           , VK_ENCODING: 'UTF-8'
           , VK_CHARSET: 'UTF-8'
@@ -69,7 +72,7 @@ IpizzaBank.services =
           , VK_SND_NAME: true
           , VK_REF: true
           , VK_MSG: true
-          , VK_T_DATE: true
+          , VK_T_DATETIME: true
           , VK_MAC: false
           , VK_LANG: false
           , VK_AUTO: false
@@ -221,6 +224,7 @@ IpizzaBank.prototype.json = function () {
 
   if (this.get('curr')) params['VK_CURR'] = this.get('curr')
   if (this.get('return')) params['VK_RETURN'] = this.get('return')
+  if (this.get('cancel')) params['VK_CANCEL'] = this.get('cancel')
   if (this.get('lang')) params['VK_LANG'] = this.get('lang')
   if (this.get('encoding') && this.name != 'krediidipank') {
     // Krediidipank uses ISO-8859-13 as alernative.

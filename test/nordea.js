@@ -55,7 +55,7 @@ describe('nordea', function() {
     , amount: 10
     , encoding: 'utf8'
     }).json()
-    var result = 'gqAvFlvlVJLysDdcgAW9043pvtO6Teq6PWifYWQPVvuzAlXHexZePXszIxw4rDwd8t0r8MmED9oAqVoRRgW6QZW3Soy4uESv+rIfS9W2aLa4G5kw7c7IKNjqbDfVgzySzchlLuTJ9bawJ8EIwKEao85ogrmWZpMpbzueKZEpzjtZRQweEMTYaWHJorLLNH8d4WUyNaKy7oz6rdTPRpo8ieJFWwcPLulrippYUcZECvzWHMMkHA2nb29fdoPojeT0L6kS9p+UwHq9x09T+gaqkd3WPKpd5M1Asp/koisbfHIpqhGoyOg2q/GHRaET8Nv+zhDAVFUTIUGzLV4PWPHFWQ=='
+    var result = 'gpWxpjEOyClSNSVjcuyauDOQXIhlqRhtfjmcSfkSKqlTDmZ43TcvWOPJH83CFVAtLWu4aqf2A01GTBs53ehCydI9HNR0juUXH2XNjNC0uZ4lAfZwcYiNa5lal7l3SayNWdS6Fmh9pbyYduWoJFJ9cJobqpw1f9r9loUHK8ct7n7z3FL5vtm9nOE382nC63ynOOaUMv/cmiUYBl++JISYHkXrkIziT82yTQxgW2dTpcBcTso6ORzbZ52V0FtJjGJpDsCUmCzmkmrOWnubv2amjxCl6v1a22dAZDk8Ei0Vj2caHu68cPmil3m2+4VfpaLt1B5PoCU68GEPonpYppwrTA=='
     assert.strictEqual(json.VK_MAC, result)
   })
 
