@@ -232,7 +232,7 @@ IpizzaBank.prototype.json = function () {
     params['VK_ENCODING'] = params['VK_CHARSET'] = this.get('encoding')
   }
 
-  if (this.name != 'swedbank') delete params['VK_ENCODING']
+  //if (this.name != 'swedbank') delete params['VK_ENCODING']
   if (!~['seb', 'krediidipank', 'lhv'].indexOf(this.name)) {
     delete params['VK_CHARSET']
   }
