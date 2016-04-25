@@ -241,12 +241,15 @@ IpizzaBank.prototype.json = function () {
                || params['VK_CHARSET'] == 'UTF-8'
 
   params['VK_MAC'] = this.genMac_(params)
+  params['VK_DATETIME'] = Date.toString();
 
   log.verbose('req mac', params['VK_MAC'])
 
   var ipizza = require(__dirname + '/../ipizza.js')
   params['VK_RETURN'] = this.get('return') || ipizza.get('hostname') +
     ipizza.get('returnRoute').replace(':provider', this.get('provider'))
+  params['VK_CANCEL'] = this.get('cancel') || ipizza.get('hostname') +
+      ipizza.get('cancelRoute').replace(':provider', this.get('provider'))
   log.verbose('req body', params)
   return params
 }
@@ -359,7 +362,7 @@ IpizzaBank.prototype.response = function (req, resp) {
                                         , receiverName: params.VK_REC_NAME
                                         , sender: params.VK_SND_ACC
                                         , senderName: params.VK_SND_NAME
-                                        , date: params.VK_T_DATE
+                                        , date: params.VK_T_DATETIME
                                         }, reply), req, resp)
       }
     }

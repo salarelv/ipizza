@@ -127,6 +127,21 @@ ipizza.set = function (key, val) {
       router.addRoute(val, ipizza.response)
     }
   }
+  else if (key === 'cancelRoute' || key === 'env') {
+    if (!(typeof val === 'string' && val.length)) {
+      return ipizza.error_('cancelRoute', 'is not valid' + val)
+    }
+    if (key === 'cancelRoute') {
+      if (!/\/\:provider(\/|$)/.test(val)) {
+        if (val.substr(-1) !== '/') {
+          val += '/'
+        }
+        val += ':provider'
+      }
+      router = new routes.Router()
+      router.addRoute(val, ipizza.response)
+    }
+  }
 
   opt[key] = val
 
@@ -203,6 +218,7 @@ ipizza.define = function (provider, klass) {
 ipizza.set(
   { appHandler: undefined
   , returnRoute: '/api/payment/response'
+  , cancelRoute: '/api/payment/canceled'
   , hostname: 'http://' + require('os').hostname()
   , logLevel: process.env.NODE_ENV == 'production' ? 'info' : 'verbose'
   , logStream: process.stdout
