@@ -240,15 +240,18 @@ IpizzaBank.prototype.json = function () {
                || params['VK_CHARSET'] == 'UTF-8'
 
   params['VK_DATETIME'] = (new Date()).toISOString();
+
+  var ipizza = require(__dirname + '/../ipizza.js')
   params['VK_RETURN'] = this.get('return') || ipizza.get('hostname') +
     ipizza.get('returnRoute').replace(':provider', this.get('provider'));
   params['VK_CANCEL'] = this.get('cancel') || ipizza.get('hostname') +
       ipizza.get('cancelRoute').replace(':provider', this.get('provider'));
+
+  //Calculate mac hash
   params['VK_MAC'] = this.genMac_(params)
 
   log.verbose('req mac', params['VK_MAC'])
 
-  var ipizza = require(__dirname + '/../ipizza.js')
 
   log.verbose('req body', params)
   return params
