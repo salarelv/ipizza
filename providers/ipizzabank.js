@@ -39,7 +39,6 @@ IpizzaBank.services =
           , VK_CANCEL: ''
           , VK_DATETIME: ''
           , VK_MAC: ''
-          , VK_RETURN: ''
           , VK_LANG: 'ENG'
           , VK_ENCODING: 'UTF-8'
           }
@@ -240,16 +239,17 @@ IpizzaBank.prototype.json = function () {
   this.utf8_ = params['VK_ENCODING'] === 'UTF-8'
                || params['VK_CHARSET'] == 'UTF-8'
 
-  params['VK_MAC'] = this.genMac_(params)
   params['VK_DATETIME'] = (new Date()).toISOString();
+  params['VK_RETURN'] = this.get('return') || ipizza.get('hostname') +
+    ipizza.get('returnRoute').replace(':provider', this.get('provider'));
+  params['VK_CANCEL'] = this.get('cancel') || ipizza.get('hostname') +
+      ipizza.get('cancelRoute').replace(':provider', this.get('provider'));
+  params['VK_MAC'] = this.genMac_(params)
 
   log.verbose('req mac', params['VK_MAC'])
 
   var ipizza = require(__dirname + '/../ipizza.js')
-  params['VK_RETURN'] = this.get('return') || ipizza.get('hostname') +
-    ipizza.get('returnRoute').replace(':provider', this.get('provider'))
-  params['VK_CANCEL'] = this.get('cancel') || ipizza.get('hostname') +
-      ipizza.get('cancelRoute').replace(':provider', this.get('provider'))
+
   log.verbose('req body', params)
   return params
 }
@@ -267,7 +267,7 @@ IpizzaBank.prototype.genPackage_ = function (params) {
 
 IpizzaBank.prototype.genMac_ = function (params) {
   var pack = this.genPackage_(_.reduce(params, function (memo, val, key) {
-    if (!~['VK_MAC', 'VK_RETURN', 'VK_LANG', 'VK_ENCODING',
+    if (!~['VK_MAC', 'VK_LANG', 'VK_ENCODING',
            'VK_CHARSET'].indexOf(key)) {
       memo[key] = val
     }
