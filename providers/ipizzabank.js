@@ -294,7 +294,7 @@ IpizzaBank.prototype.verify_ = function (body) {
                || body['VK_CHARSET'] === 'UTF-8'
   var params = _.reduce(IpizzaBank.services[service],
     function (memo, val, key) {
-      if (val) {
+      if (val && !~['VK_MAC', 'VK_LANG', 'VK_ENCODING', 'VK_CHARSET'].indexOf(key)) {
         memo[key] = body[key] = unescape(body[key]).replace(/\+/g, ' ')
       }
       return memo
@@ -313,8 +313,11 @@ IpizzaBank.prototype.verify_ = function (body) {
 }
 
 IpizzaBank.prototype._parsePostRequest = function(req, next) {
-  if (req.body) {
+  if (req.method == "POST" && req.body) {
     return next(req.body)
+  }
+  else if (req.method == "GET" && req.query) {
+    return next(req.query)
   }
 
   var form = new formidable.IncomingForm()
