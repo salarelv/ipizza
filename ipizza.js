@@ -7,7 +7,9 @@ var Buffer = require('buffer').Buffer
 
 var ipizza = Object.create(require('events').EventEmitter.prototype)
   , opt = {}
-  , providers = {}
+  , providers = {};
+
+var router = new routes.Router();
 
 log.heading = 'ipizza'
 
@@ -123,7 +125,6 @@ ipizza.set = function (key, val) {
         }
         val += ':provider'
       }
-      router = new routes.Router()
       router.addRoute(val, ipizza.response)
     }
   }
@@ -138,7 +139,6 @@ ipizza.set = function (key, val) {
         }
         val += ':provider'
       }
-      router = new routes.Router()
       router.addRoute(val, ipizza.response)
     }
   }
@@ -207,6 +207,16 @@ ipizza.response = function (provider, req, resp) {
   }
   else {
     ipizza.error_('provider for response', 'No such provider ' + provider)
+  }
+}
+
+ipizza.canceled = function (provider, req, resp) {
+  if (providers[provider]) {
+    var payment = new providers[provider].klass(providers[provider].opt)
+    payment.canceled(req, resp)
+  }
+  else {
+    ipizza.error_('provider for canceled', 'No such provider ' + provider)
   }
 }
 

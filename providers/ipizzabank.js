@@ -372,6 +372,11 @@ IpizzaBank.prototype.response = function (req, resp) {
   }
 }
 
+IpizzaBank.prototype.canceled = function (req, resp) {
+  var ipizza = require(__dirname + '/..')
+  ipizza.emit('error', _.extend({type: 'canceled'}, reply), req, resp)
+}
+
 IpizzaBank.prototype.html = function () {
   var uid = this.get('provider') + ((Math.random() * 1e6) | 0)
     , params = this.json()
