@@ -284,7 +284,6 @@ IpizzaBank.prototype.genMac_ = function (params) {
   log.verbose('req package', pack)
   var signer = crypto.createSign('RSA-SHA1')
   signer.update(pack)
-  //console.log("genMac", signer.sign(this.get('privateKey').toString('utf8'), 'base64'));
   return signer.sign(this.get('privateKey').toString('utf8'), 'base64')
 }
 
@@ -296,7 +295,8 @@ IpizzaBank.prototype.verify_ = function (body) {
   var params = _.reduce(IpizzaBank.services[service],
     function (memo, val, key) {
       if (val && !~['VK_MAC', 'VK_LANG', 'VK_ENCODING', 'VK_CHARSET'].indexOf(key)) {
-        memo[key] = body[key] = unescape(body[key]).replace(/\+/g, ' ')
+        //memo[key] = body[key] = unescape(body[key]).replace(/\+/g, ' ')
+        memo[key] = body[key] = unescape(body[key])
       }
       return memo
     }, {})
@@ -309,7 +309,6 @@ IpizzaBank.prototype.verify_ = function (body) {
   log.verbose('resp mac', body.VK_MAC)
   var verifier = crypto.createVerify('RSA-SHA1')
   verifier.update(pack)
-
   return verifier.verify(cert, body.VK_MAC || '', 'base64')
 }
 
