@@ -6,6 +6,7 @@ var Buffer = require('buffer').Buffer
   , log = require('npmlog')
   , formidable = require('formidable')
   , _ = require('lodash')._
+  , moment = require('moment')
 
 function IpizzaBank (opt) {
   this.opt = {}
