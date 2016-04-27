@@ -239,7 +239,7 @@ IpizzaBank.prototype.json = function () {
   this.utf8_ = params['VK_ENCODING'] === 'UTF-8'
                || params['VK_CHARSET'] == 'UTF-8'
 
-  params['VK_DATETIME'] = (new Date()).toISOString();
+  params['VK_DATETIME'] = moment().format('YYYY-MM-DDTHH:mm:ssZZ');
 
   var ipizza = require(__dirname + '/../ipizza.js')
   params['VK_RETURN'] = this.get('return') || ipizza.get('hostname') +

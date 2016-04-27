@@ -26,7 +26,7 @@
     "formidable": "^1.0.14",
     "iconv-lite": "^0.2.11",
     "lodash": "^2.4.1",
-    "moment": "^2.5.1",
+    "moment": "^2.13.0",
     "npmlog": "0.0.6",
     "routes": "^0.2.0",
     "string": "^1.8.0"
