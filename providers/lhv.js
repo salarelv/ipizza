@@ -7,7 +7,7 @@ function LHV (opt) {
 LHV.prototype = Object.create(IpizzaBank.prototype)
 
 LHV.prototype.gateways =
-  { development: 'https://pangalink.net/banklink/lhv'
+  { development: 'https://pangalink.net/banklink/lhv-common'
   , production: 'https://www.lhv.ee/banklink'
   }
 
