@@ -261,10 +261,8 @@ IpizzaBank.prototype.json = function () {
 IpizzaBank.prototype.genPackage_ = function (params) {
   return this.lastPackage_ = _.reduce(params, function (memo, val, key) {
     val = val.toString()
-    var len = (~['seb', 'lhv', 'krediidipank', 'nordea'].indexOf(this.name)) && this.utf8_ ?
-      Buffer.byteLength(val, 'utf8') : val.length
-    memo += S('0').repeat(3 - len.toString().length).toString()
-      + len + val
+    var len = val.length;
+    memo += S('0').repeat(3 - len.toString().length).toString() + len + val;
     return memo
   }, '', this)
 }
