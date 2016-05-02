@@ -376,6 +376,7 @@ IpizzaBank.prototype.response = function (req, resp) {
 IpizzaBank.prototype.canceled = function (req, resp) {
   var ipizza = require(__dirname + '/..');
   var reply = { provider: this.name };
+  var self = this;
 
   this._parsePostRequest(req, response)
 
