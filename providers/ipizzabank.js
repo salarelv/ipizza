@@ -374,8 +374,39 @@ IpizzaBank.prototype.response = function (req, resp) {
 }
 
 IpizzaBank.prototype.canceled = function (req, resp) {
-  var ipizza = require(__dirname + '/..')
-  ipizza.emit('error', _.extend({type: 'canceled'}, reply), req, resp)
+  var ipizza = require(__dirname + '/..');
+  var reply = { provider: this.name };
+
+  this._parsePostRequest(req, response)
+
+  function response (params) {
+    try {
+      log.verbose('resp body', params)
+
+      var ret = self.verify_(params)
+      var reply = { provider: self.name };
+    }
+    catch (e) {
+      ret = 0
+    }
+
+    if (!ret) {
+      ipizza.emit('error', _.extend({type: 'not verified'}, reply), req, resp)
+    }
+    else {
+      reply = _.extend(reply, {
+        bankId: params.VK_SND_ID
+      , clientId: params.VK_REC_ID
+      , id: params.VK_STAMP
+      , ref: params.VK_REF
+      , msg: params.VK_MSG
+      , lang: params.VK_LANG
+      , isAuto: params.VK_AUTO === 'Y'
+      , type: 'canceled'
+      })
+      ipizza.emit('canceled', reply), req, resp);
+    }
+  }
 }
 
 IpizzaBank.prototype.html = function () {

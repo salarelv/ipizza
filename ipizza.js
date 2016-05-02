@@ -139,7 +139,7 @@ ipizza.set = function (key, val) {
         }
         val += ':provider'
       }
-      router.addRoute(val, ipizza.response)
+      router.addRoute(val, ipizza.canceled)
     }
   }
 
