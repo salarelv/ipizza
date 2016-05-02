@@ -404,7 +404,7 @@ IpizzaBank.prototype.canceled = function (req, resp) {
       , isAuto: params.VK_AUTO === 'Y'
       , type: 'canceled'
       })
-      ipizza.emit('canceled', reply), req, resp);
+      ipizza.emit('canceled', reply, req, resp);
     }
   }
 }
